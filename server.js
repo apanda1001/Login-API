@@ -2,17 +2,16 @@
 const express=require('express');
 const bodyParser=require('body-parser');
 const http = require('http');
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // const passport = require("passport");
 // const passport_local = require("passport-local");
 // const passportLocalMongoose =require("passport-local-mongoose");
 const user = require('./data').userDB;
 const bcrypt=require('bcrypt');
-// mongoose.set('useNewUrlParser', true);
-// // mongoose.set('useFindAndModify', false);
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useUnifiedTopology', true);
-// mongoose.connect("mongodb://localhost/Database");
+const dbURI='mongodb+srv://admin:1234@user-database.mnrk4.mongodb.net/user-database';
+mongoose.connect(dbURI,{'useNewUrlParser':true,'useUnifiedTopology': true})
+.then((result) => {app.listen(3000); console.log('Database connected!');})
+.catch((err) => console.log(err));
 
 var app = express();
 const server = http.createServer(app);
@@ -65,9 +64,9 @@ app.post("/login",(req, res) => {
    }
 });
 
-app.listen(3000, () => {
-   console.log("Listening on http://localhost:3000/login");
-});
+// app.listen(3000, () => {
+//    console.log("Listening on http://localhost:3000/login");
+// });
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const uri = "mongodb+srv://admin:<password1234>@user-database.mnrk4.mongodb.net/User-Database?retryWrites=true&w=majority";
